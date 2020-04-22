@@ -1,0 +1,58 @@
+@model VentasApp.Models.Productos
+
+@{
+    ViewData["Title"] = "Editar producto";
+}
+<br>
+<h1>Editar producto</h1>
+<br>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id_Producto" />
+            <div class="form-group">
+                <label asp-for="Nombre" class="control-label"></label>
+                <input asp-for="Nombre" class="form-control" />
+                <span asp-validation-for="Nombre" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Precio" class="control-label"></label>
+                <input asp-for="Precio" class="form-control" />
+                <span asp-validation-for="Precio" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cantidad" class="control-label"></label>
+                <input asp-for="Cantidad" class="form-control" />
+                <span asp-validation-for="Cantidad" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Fecha_Vencimiento" class="control-label">Fecha de Vencimiento</label>
+                <input asp-for="Fecha_Vencimiento" class="form-control" />
+                <span asp-validation-for="Fecha_Vencimiento" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Id_Categoria" class="control-label">Categoría</label>
+                <select name="Id_Categoria" id="Id_Categoria" class="form-control">
+                    @foreach (var item in ViewBag.categoriasList)
+                    {
+                        <option value="@item.Id_Categoria">@item.Nombre</option>
+                    }
+                </select>
+                <span asp-validation-for="Id_Categoria" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-info" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index" class="btn btn-light">Cancelar y regresar</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

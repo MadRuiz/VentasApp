@@ -1,0 +1,52 @@
+@model IEnumerable<VentasApp.Models.Tiendas>
+
+@{
+    ViewData["Title"] = "Tiendas";
+}
+
+<h1>Administrar Tiendas</h1>
+
+<p>
+    <a asp-action="Create">Agregar tienda</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Encargado)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Contacto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Encargado)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Contacto)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Direccion)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id_Tienda">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id_Tienda">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -1,0 +1,90 @@
+@model VentasApp.Models.Ventas
+
+@{
+    ViewData["Title"] = "Detalle de venta";
+}
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <br>
+            <h1>Ventas - Detalle</h1>
+            <br>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <h4>Datos de la venta</h4>
+        @{
+            if (ViewBag.ventaObject is null)
+            {
+                <h3 class="text-danger">Algo ha salido mal</h3>
+            } else
+            {
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>N. de Factura</th>
+                            <th>Cliente</th>
+                            <th>Fecha</th>
+                            <th>Total</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="table-light">
+                            <td>@ViewBag.ventaObject.Codigo_Factura</td>
+                            <td>@ViewBag.ventaObject.Nombre_Cliente</td>
+                            <td>@ViewBag.ventaObject.Fecha</td>
+                            <td>@ViewBag.ventaObject.Total</td>
+                        </tr>
+                    </tbody>
+                </table>
+            }
+        }
+        </div>
+        <br>
+        <div class="col-12">
+            <h4>Productos</h4>
+            @if (ViewBag.detList is null)
+            {
+                <h3 class="text-danger">Algo ha salido mal</h3>
+            }else{
+                <table class="table table-striped">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Producto</th>
+                            <th>Precio Unitario</th>
+                            <th>Cantidad</th>
+                            <th>SubTotal</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in ViewBag.detList)
+                        {
+                            <tr>
+                            @foreach (var prod in ViewBag.productosList)
+                            {
+                                if (item.Id_Producto == prod.Id_Producto)
+                                {
+                                    <td>@prod.Nombre</td>   
+                                    <td>@prod.Precio</td>   
+                                }
+                            }
+                                <td>@item.Cantidad</td>
+                                <td>@item.Subtotal</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6">
+            <a asp-action="Index" class="btn btn-light btn-block">Regresar</a>
+        </div>
+    </div>
+</div>
+
+
+
+

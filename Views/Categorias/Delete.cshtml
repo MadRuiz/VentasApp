@@ -1,0 +1,27 @@
+@model VentasApp.Models.Categorias
+
+@{
+    ViewData["Title"] = "Eliminar categoria";
+}
+
+<h1>Eliminar Categoría</h1>
+
+<h3>¿Desea eliminar esta categoría?</h3>
+<div>
+    <h4 class="text-danger">Esta acción es solo para administradores</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            Categoría:
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Nombre)
+        </dd>
+    </dl>
+    
+    <form asp-action="Delete">
+        <input type="hidden" asp-for="Id_Categoria" />
+        <input type="submit" value="Delete" class="btn btn-danger" /> |
+        <a asp-action="Index" class="btn btn-light">Cancelar</a>
+    </form>
+</div>

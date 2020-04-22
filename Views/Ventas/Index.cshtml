@@ -1,0 +1,65 @@
+@model IEnumerable<VentasApp.Models.Ventas>
+
+@{
+    ViewData["Title"] = "Ventas";
+}
+
+<h1>Ventas - Administrar</h1>
+
+<p>
+    <a asp-action="Create">Agregar nueva</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Codigo_Factura)
+            </th>
+            <th>
+                Cliente
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fecha)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Total)
+            </th>
+            <th>
+                Tienda
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Codigo_Factura)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre_Cliente)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Fecha)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Total)
+            </td>
+            <td>
+                @foreach (var t in ViewBag.tiendaList)
+                {
+                    if (item.Id_Tienda == t.Id_Tienda)
+                    {
+                        <p>@t.Nombre</p>
+                    }
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id_Venta">Editar</a> |
+                <a asp-action="Details" asp-route-id="@item.Id_Venta">Detalle de venta</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id_Venta">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

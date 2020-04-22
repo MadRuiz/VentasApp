@@ -1,0 +1,64 @@
+@model IEnumerable<VentasApp.Models.Productos>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Productos - Administrar</h1>
+
+<p>
+    <a asp-action="Create">Agregar nuevo</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cantidad)
+            </th>
+            <th>
+                Fecha de Vencimiento
+            </th>
+            <th>
+                Categoría
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Nombre)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Precio)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cantidad)
+            </td>
+            <td>
+                @Html.DisplayFor(modelIem => item.Fecha_Vencimiento)
+            </td>
+            <td>
+                @foreach (var cat in ViewBag.categoriasList)
+                {
+                    if (cat.Id_Categoria == item.Id_Categoria)
+                    {
+                    <p>@cat.Nombre</p>
+                    }
+                }
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id_Producto">Editar</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id_Producto">Eliminar</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

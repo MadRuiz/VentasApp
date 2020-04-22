@@ -1,0 +1,51 @@
+@model IEnumerable<VentasApp.Models.Categorias>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <br>
+            <h1>Categorías - Administrar</h1>
+            <br>
+        </div>
+        <br>
+        <div class="col-12">
+            <a asp-action="Create">Agregar nueva</a>
+        </div>
+    </div>
+    <div class="row">
+        <table class="table table-striped">
+            <thead class="table-dark">
+                <tr>
+                    <th>#</th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nombre)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+        @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Id_Categoria)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nombre)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.Id_Categoria">Editar</a> |
+                        <a asp-action="Delete" asp-route-id="@item.Id_Categoria" class="text-danger">Eliminar</a>
+                    </td>
+                </tr>
+        }
+            </tbody>
+        </table>
+    </div>
+
+</div>
+
